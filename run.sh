@@ -52,25 +52,20 @@ sudo docker pull privasea/acceleration-node-beta:latest
 
 # Create directory and change to /privasea
 echo -e "${RED}Creating /privasea/config directory and changing to /privasea...${NC}"
-sudo mkdir -p /privasea/config && cd /privasea
+mkdir -p "$HOME/privasea/config" && cd "$HOME/privasea"
 
-# Run Docker container with mounted volume and execute command
-echo -e "${RED}Running Docker container with privasea/acceleration-node-beta:latest...${NC}"
-sudo docker run -it -v "/privasea/config:/app/config" \
+# Run Docker container to create keystore
+echo -e "${RED}Running Docker container to create keystore...${NC}"
+docker run --rm -it -v "$HOME/privasea/config:/app/config" \
 privasea/acceleration-node-beta:latest ./node-calc new_keystore
 
 # Check if there is a keystore file in the /privasea/config directory
-echo -e "${RED}Checking for keystore file in /privasea/config...${NC}"
-cd /privasea/config && ls
-
-# Rename the keystore file (replace with the actual filename)
-echo -e "${RED}Renaming keystore file...${NC}"
-# Replace 'UTC--2025-01-06T06-11-07.485797065Z--f07c3ef23ae7beb8cd8ba5ff546e35fd4b332b34' with the actual keystore filename
-sudo mv ./<actual-keystore-filename> ./wallet_keystore
+echo -e "${RED}Checking for keystore file in $HOME/privasea/config...${NC}"
+cd "$HOME/privasea/config" && ls
 
 # Switch to the program running directory
-echo -e "${RED}Switching to /privasea/ directory...${NC}"
-cd /privasea/
+echo -e "${RED}Switching to $HOME/privasea/ directory...${NC}"
+cd "$HOME/privasea/"
 
 # Prompt user for the keystore password
 echo -e "${RED}Please enter the keystore password: ${NC}"
@@ -78,6 +73,8 @@ read -s KEYSTORE_PASSWORD
 
 # Run the compute node command with provided password
 echo -e "${RED}Running Docker container with KEYSTORE_PASSWORD...${NC}"
-sudo docker run -d -v "/privasea/config:/app/config" \
--e KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" \
+KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD && \
+docker run -d --name privanetix-node \
+-v "$HOME/privasea/config:/app/config" \
+-e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD \
 privasea/acceleration-node-beta:latest
