@@ -11,6 +11,10 @@ wget https://github.com/rokipdj88/privanetix-node/raw/main/run.sh -O run.sh && c
 
 - 🔐 Input KEYSTORE PASSWORD
 
+## GO TO PRIVASEA DASBOARD : [https://deepsea-beta.privasea.ai/privanetixNode](https://deepsea-beta.privasea.ai/privanetixNode)
+
+Connect a wallet where you will recieve reward and then give the node any name, set up commission (I will use 1%), and then enter the node address you note down in above step and then click on Set up my node option
+Now run the below command to start your Privasea Privanetix Node, Make sure to input KEYSTORE PASSWORD correctly, you provided in the above steps
 
 ## 📝 DOCUMENT GUIDE
 
