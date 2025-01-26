@@ -52,20 +52,16 @@ sudo docker pull privasea/acceleration-node-beta:latest
 
 # Create directory and change to /privasea
 echo -e "${RED}Creating /privasea/config directory and changing to /privasea...${NC}"
-mkdir -p "$HOME/privasea/config" && cd "$HOME/privasea"
+mkdir -p ~/privasea/config && cd ~/privasea
 
 # Run Docker container to create keystore
-echo -e "${RED}Running Docker container to create keystore...${NC}"
-docker run --rm -it -v "$HOME/privasea/config:/app/config" \
-privasea/acceleration-node-beta:latest ./node-calc new_keystore
+echo -e "${RED}Running Docker container to create keystore., Copy your Node Addres add to Privase Dasboard${NC}"
+docker run --rm -it -v "$HOME/privasea/config:/app/config" privasea/acceleration-node-beta:latest ./node-calc new_keystore
 
 # Check if there is a keystore file in the /privasea/config directory
-echo -e "${RED}Checking for keystore file in $HOME/privasea/config...${NC}"
-cd "$HOME/privasea/config" && ls
+echo -e "${RED}Renameming New Keystore to wallet_keytore $HOME/privasea/config...${NC}"
+mv $HOME/privasea/config/UTC--* $HOME/privasea/config/wallet_keystore
 
-# Switch to the program running directory
-echo -e "${RED}Switching to $HOME/privasea/ directory...${NC}"
-cd "$HOME/privasea/"
 
 # Prompt user for the keystore password
 echo -e "${RED}Please enter the keystore password: ${NC}"
@@ -73,8 +69,7 @@ read -s KEYSTORE_PASSWORD
 
 # Run the compute node command with provided password
 echo -e "${RED}Running Docker container with KEYSTORE_PASSWORD...${NC}"
-KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD && \
-docker run -d --name privanetix-node \
--v "$HOME/privasea/config:/app/config" \
+KEYSTORE_PASSWORD=$KENTER_YOUR_KEYSTORE_PASSWORD && \
 -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD \
-privasea/acceleration-node-beta:latest
+KEYSTORE_PASSWORD=$ENTER_YOUR_KEYSTORE_PASSWORD && docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
+echo -e "${RED}NODE SUDAH JALAN LER CEK DASBOARD${NC}"
