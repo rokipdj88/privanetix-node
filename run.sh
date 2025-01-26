@@ -69,7 +69,9 @@ read -s KEYSTORE_PASSWORD
 
 # Run the compute node command with provided password
 echo -e "${RED}Running Docker container with KEYSTORE_PASSWORD...${NC}"
-KEYSTORE_PASSWORD=$KENTER_YOUR_KEYSTORE_PASSWORD && \
--e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD \
-KEYSTORE_PASSWORD=$ENTER_YOUR_KEYSTORE_PASSWORD && docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
-echo -e "${RED}NODE SUDAH JALAN LER CEK DASBOARD${NC}"
+docker run -d --name privanetix-node \
+  -v "$HOME/privasea/config:/app/config" \
+  -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD \
+  privasea/acceleration-node-beta:latest
+
+echo -e "${RED}NODE SUDAH JALAN LER CEK DASHBOARD${NC}"
