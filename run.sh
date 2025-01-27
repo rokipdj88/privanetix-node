@@ -18,6 +18,8 @@ echo -e "${RED}-----------------------------------------------------${NC}"
 echo -e "${BLUE}Buy VPS 40K on Telegram Store: https://t.me/candrapn${NC}"
 sleep 5
 
+rm -rf $HOME/privasea
+
 # Install necessary dependencies
 echo -e "${RED}Installing necessary dependencies...${NC}"
 sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
